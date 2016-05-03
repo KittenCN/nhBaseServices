@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <LinkString>Server=localhost;user id=root;password=;Database=chenkuserdb37;Port=3308;charset=utf8;</LinkString>
+  <pKey>1234567890ABCDEF</pKey>
+</Config>
