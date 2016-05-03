@@ -27,7 +27,6 @@ namespace nhBaseServices
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\log.txt", true))
             {
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Service Start.");
-                // TODO: 在此处添加代码以启动服务。
                 try
                 {
                     Thread.Sleep(30000);
@@ -53,7 +52,6 @@ namespace nhBaseServices
                 oTimer_Get.Enabled = false;
                 try
                 {
-                    //此处可进行编写详细的业务操作
                     MainEvent();
                     sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "MainEvent Success.");
                 }
