@@ -104,7 +104,7 @@ namespace nhBaseServices
                     EnDeCode.EnDeCode EDC = new EnDeCode.EnDeCode();
                     priKey = EDC.DesEncrypt(EDC.GetHexString(16), pKey);
 
-                    strInSql = "select * from skt17 where skf203='" + DSSql.Tables[0].Rows[i][0].ToString() + "' and skf229!='" + TimeStamp + "' ";
+                    strInSql = "select * from skt17 where skf204=1 and skf203='" + DSSql.Tables[0].Rows[i][0].ToString() + "' and skf229!='" + TimeStamp + "' ";
                     intInSql = MySqlHelper.MySqlHelper.ExecuteSql(strInSql, LinkString);
                     if(intInSql<=0)
                     {
