@@ -102,7 +102,7 @@ namespace nhBaseServices
             string strInSql = "update skt17 set skf204=0 where skf229!='" + TimeStamp + "' ";
             int intInSql = MySqlHelper.MySqlHelper.ExecuteSql(strInSql, LinkString);
             //sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Update All hisData Success.");
-            SW("Update All hisData Success.");
+            SW("Update All hisData Success.::" + strInSql);
             EnDeCode.EnDeCode EDC = new EnDeCode.EnDeCode();
             string strSQL = "select skf97 from skt8 where skf104=1";
             DataSet DSSql = MySqlHelper.MySqlHelper.Query(strSQL, LinkString);
@@ -125,7 +125,7 @@ namespace nhBaseServices
                             strInSql = strInSql + "value('" + DSSql.Tables[0].Rows[i][0].ToString() + "',1,'" + priKey + "','" + System.DateTime.Now.ToString() + "','System Service','" + TimeStamp + "') ";
                             intInSql = MySqlHelper.MySqlHelper.ExecuteSql(strInSql, LinkString);
                             //sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:: ") + DSSql.Tables[0].Rows[i][0].ToString() + "::Insert new data Success.");
-                            SW(DSSql.Tables[0].Rows[i][0].ToString() + "::Insert new data Success.");
+                            SW(DSSql.Tables[0].Rows[i][0].ToString() + "::Insert new data Success.::" + strInSql);
                         }
                         else
                         {
@@ -140,7 +140,7 @@ namespace nhBaseServices
                         SW("Insert new data Error.");
                     }
                 }
-                if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour <= 3)
+                if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour <= 0)
                 {
                     string strinSQL = "select * from skt6 where skf91=1 ";
                     DataSet dsinSQL = MySqlHelper.MySqlHelper.Query(strinSQL, LinkString);
@@ -151,10 +151,11 @@ namespace nhBaseServices
                             try
                             {
                                 string strExSQL = "insert into skt7(skf73, skf74, skf75, skf78, skf79, skf82, skf199, skf200,skf80,skf81)";
-                                strExSQL = strExSQL + " value('" + dsinSQL.Tables[0].Rows[i]["skf64"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf63"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf63"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf66"].ToString() + "', '" + int.Parse(dsinSQL.Tables[0].Rows[i]["skf66"].ToString()) + int.Parse(dsinSQL.Tables[0].Rows[i]["skf67"].ToString()) + "', '" + System.DateTime.Now.ToString() + "', '" + "System Auto" + "', 0,'" + dsinSQL.Tables[0].Rows[i]["skf67"].ToString() + "',0) ";
+                                int intTemp = int.Parse(dsinSQL.Tables[0].Rows[i]["skf66"].ToString()) + int.Parse(dsinSQL.Tables[0].Rows[i]["skf67"].ToString());
+                                strExSQL = strExSQL + " value('" + dsinSQL.Tables[0].Rows[i]["skf64"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf63"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf63"].ToString() + "', '" + dsinSQL.Tables[0].Rows[i]["skf66"].ToString() + "', '" + intTemp + "', '" + System.DateTime.Now.ToString() + "', '" + "System Auto" + "', 0,'" + dsinSQL.Tables[0].Rows[i]["skf67"].ToString() + "',0) ";
                                 int intExSQL = MySqlHelper.MySqlHelper.ExecuteSql(strExSQL, LinkString);
                                 //sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Insert JF History data Success.");
-                                SW("Insert JF History data Success.");
+                                SW("Insert JF History data Success.::" + strExSQL);
                             }
                             catch
                             {
@@ -165,6 +166,10 @@ namespace nhBaseServices
                     }
                     strinSQL = "update skt6 set skf66=skf66+skf67,skf67=0 where skf91=1";
                     int intinSQL = MySqlHelper.MySqlHelper.ExecuteSql(strinSQL, LinkString);
+                    SW("Update skt6 sucess!::" + strinSQL);
+
+                    strinSQL = "DELETE FROM skt7 WHERE skf76=skf77 AND skf78=skf79 AND skf80=skf81";
+                    SW("Clean skt7 success!::" + strinSQL);
                 }
             }
         }
